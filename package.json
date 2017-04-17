@@ -7,6 +7,14 @@
     "engines": {
         "vscode": "^1.5.0"
     },
+    "bugs": {
+        "url": "https://github.com/wraith13/multi-encode/issues"
+    },
+    "homepage": "https://github.com/wraith13/multi-encode/blob/master/README.md",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/wraith13/multi-encode.git"
+    },
     "categories": [
         "Other"
     ],
