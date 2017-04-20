@@ -1,19 +1,42 @@
 'use strict';
 import * as vscode from 'vscode';
 
+module MultiEncode
+{
+    let context: vscode.ExtensionContext;
+    //var pass_through;
+
+    /*
+    function getConfiguration<type>(key ?: string) : type
+    {
+        var configuration = vscode.workspace.getConfiguration("multi-encode");
+        return key ?
+            configuration[key]:
+            configuration;
+    }
+    */
+
+    export function registerCommand(aContext: vscode.ExtensionContext) : void
+    {
+        context = aContext;
+        context.subscriptions.push
+        (
+            vscode.commands.registerCommand
+            (
+                'multi-encode.kick', kick
+            )
+        );
+    }
+
+    export function kick() : void
+    {
+        vscode.window.showInformationMessage('Hello World!');
+    }
+}
+
 export function activate(context: vscode.ExtensionContext)
 {
-    console.log('Congratulations, your extension "multi-encode" is now active!');
-
-    let disposable = vscode.commands.registerCommand
-    (
-        'extension.sayHello', () =>
-        {
-            vscode.window.showInformationMessage('Hello World!');
-        }
-    );
-
-    context.subscriptions.push(disposable);
+    MultiEncode.registerCommand(context);
 }
 
 export function deactivate() {

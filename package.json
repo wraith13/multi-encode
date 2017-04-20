@@ -19,13 +19,13 @@
         "Other"
     ],
     "activationEvents": [
-        "onCommand:extension.sayHello"
+        "onCommand:multi-encode.kick"
     ],
     "main": "./out/src/extension",
     "contributes": {
         "commands": [{
-            "command": "extension.sayHello",
-            "title": "Hello World"
+            "command": "multi-encode.kick",
+            "title": "multi encode"
         }]
     },
     "scripts": {
