@@ -3,7 +3,7 @@
     "displayName": "multi-encode",
     "description": "This extention provides many encoders.",
     "icon": "images/multi-encode.128.png",
-    "version": "0.0.1",
+    "version": "1.0.0",
     "publisher": "wraith13",
     "engines": {
         "vscode": "^1.5.0"
