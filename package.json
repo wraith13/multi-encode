@@ -2,6 +2,7 @@
     "name": "multi-encode",
     "displayName": "multi-encode",
     "description": "This extention provides many encoders.",
+    "icon": "images/multi-encode.128.png",
     "version": "0.0.1",
     "publisher": "wraith13",
     "engines": {
