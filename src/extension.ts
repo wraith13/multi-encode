@@ -3,10 +3,6 @@ import * as vscode from 'vscode';
 
 module MultiEncode
 {
-    let context: vscode.ExtensionContext;
-    //var pass_through;
-
-    /*
     function getConfiguration<type>(key ?: string) : type
     {
         var configuration = vscode.workspace.getConfiguration("multi-encode");
@@ -14,11 +10,9 @@ module MultiEncode
             configuration[key]:
             configuration;
     }
-    */
 
-    export function registerCommand(aContext: vscode.ExtensionContext) : void
+    export function registerCommand(context: vscode.ExtensionContext) : void
     {
-        context = aContext;
         context.subscriptions.push
         (
             vscode.commands.registerCommand
@@ -28,9 +22,50 @@ module MultiEncode
         );
     }
 
-    export function kick() : void
+    export async function kick() : Promise<void>
     {
-        vscode.window.showInformationMessage('Hello World!');
+        var textEditor = vscode.window.activeTextEditor;
+        var list = getConfiguration<any[]>("list");
+        var selectedText = textEditor.document.getText(textEditor.selection);
+        if (selectedText.length < 1024)
+        {
+            list = list.map
+            (
+                i =>
+                {
+                    if (i.isPreviewable)
+                    {
+                        i.detail = eval(i.description)(selectedText);
+                    }
+                    return i;
+                }
+            );
+        }
+        let select : any = await vscode.window.showQuickPick
+        (
+            list,
+            {
+                placeHolder: "Select a encoder/decoder",
+            }
+        );
+        if (select)
+        {
+            var coder = select.description;
+            textEditor.selections.map
+            (
+                selection => textEditor.edit
+                (
+                    (editBuilder: vscode.TextEditorEdit) =>
+                    {
+                        editBuilder.replace
+                        (
+                            selection,
+                            eval(coder)(textEditor.document.getText(selection))
+                        );
+                    }
+                )
+            );
+        }
     }
 }
 

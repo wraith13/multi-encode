@@ -25,8 +25,60 @@
     "contributes": {
         "commands": [{
             "command": "multi-encode.kick",
-            "title": "multi encode"
-        }]
+            "title": "multi encode",
+            "when": "editorHasSelection"
+        }],
+        "configuration": {
+            "title": "multi-encode configuration",
+            "properties": {
+                "multi-encode.list": {
+                    "type": "array",
+                    "default": [
+                        {
+                            "label": "toLowerCase",
+                            "description": "s => s.toLowerCase()",
+                            "isPreviewable": true
+                        },
+                        {
+                            "label": "toUpperCase",
+                            "description": "s => s.toUpperCase()",
+                            "isPreviewable": true
+                        },
+                        {
+                            "label": "encodeURI",
+                            "description": "s => encodeURI(s)",
+                            "isPreviewable": true
+                        },
+                        {
+                            "label": "decodeURI",
+                            "description": "s => decodeURI(s)",
+                            "isPreviewable": true
+                        },
+                        {
+                            "label": "\\ escape",
+                            "description": "s => JSON.stringify(s)",
+                            "isPreviewable": true
+                        },
+                        {
+                            "label": "eval",
+                            "description": "s => eval(s)",
+                            "isPreviewable": false
+                        },
+                        {
+                            "label": "format JSON",
+                            "description": "s => JSON.stringify(JSON.parse(s),null,4)",
+                            "isPreviewable": false
+                        },
+                        {
+                            "label": "Join lines",
+                            "description": "s => s.replace(/(\\r\\n|\\r|\\n)/g, \"\")",
+                            "isPreviewable": true
+                        }
+                    ],
+                    "description": "encoder/decoder list"
+                }
+            }
+        }
     },
     "scripts": {
         "vscode:prepublish": "tsc -p ./",
