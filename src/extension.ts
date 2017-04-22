@@ -22,24 +22,44 @@ module MultiEncode
         );
     }
 
-    export async function kick() : Promise<void>
+    function applyPreview(list : any[], selectedText : string) : void
     {
-        var textEditor = vscode.window.activeTextEditor;
+        list.forEach
+        (
+            i =>
+            {
+                if (i.isPreviewable)
+                {
+                    i.detail = eval(i.description)(selectedText);
+                }
+            }
+        );
+    }
+    function executeEncoder(textEditor : vscode.TextEditor, encoder : (source :string) => string)
+    {
+        textEditor.selections.map
+        (
+            selection => textEditor.edit
+            (
+                (editBuilder: vscode.TextEditorEdit) =>
+                {
+                    editBuilder.replace
+                    (
+                        selection,
+                        encoder(textEditor.document.getText(selection))
+                    );
+                }
+            )
+        );
+    }
+
+    async function showListAndExecute(textEditor : vscode.TextEditor) : Promise<void>
+    {
         var list = getConfiguration<any[]>("list");
         var selectedText = textEditor.document.getText(textEditor.selection);
-        if (selectedText.length < 1024)
+        if (selectedText.length < 4096)
         {
-            list = list.map
-            (
-                i =>
-                {
-                    if (i.isPreviewable)
-                    {
-                        i.detail = eval(i.description)(selectedText);
-                    }
-                    return i;
-                }
-            );
+            applyPreview(list, selectedText);
         }
         let select : any = await vscode.window.showQuickPick
         (
@@ -50,21 +70,16 @@ module MultiEncode
         );
         if (select)
         {
-            var coder = select.description;
-            textEditor.selections.map
-            (
-                selection => textEditor.edit
-                (
-                    (editBuilder: vscode.TextEditorEdit) =>
-                    {
-                        editBuilder.replace
-                        (
-                            selection,
-                            eval(coder)(textEditor.document.getText(selection))
-                        );
-                    }
-                )
-            );
+            executeEncoder(textEditor, eval(select.description));
+        }
+    }
+
+    export async function kick() : Promise<void>
+    {
+        var textEditor = vscode.window.activeTextEditor;
+        if (textEditor && textEditor.document)
+        {
+            await showListAndExecute(textEditor);
         }
     }
 }
