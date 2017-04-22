@@ -9,3 +9,4 @@ tsconfig.json
 vsc-extension-quickstart.md
 images/multi-encode.1024.png
 .history/**
+tslint.json
