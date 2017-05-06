@@ -4,6 +4,12 @@ All notable changes to the "multi-encode" extension will be documented in this f
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## ?.?.? - ????-??-??
+
+### Added
+
+- Specify a license.
+
 ## 1.0.0 - 2017-04-23
 
 ### Added

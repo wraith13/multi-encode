@@ -5,6 +5,7 @@
     "icon": "images/multi-encode.128.png",
     "version": "1.0.0",
     "publisher": "wraith13",
+    "license": "SEE LICENSE IN LICENSE_1_0.txt",
     "engines": {
         "vscode": "^1.5.0"
     },
