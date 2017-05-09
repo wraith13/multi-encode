@@ -21,13 +21,20 @@
         "Other"
     ],
     "activationEvents": [
-        "onCommand:multi-encode.kick"
+        "onCommand:multi-encode.kick",
+        "onCommand:multi-encode.selectedText",
+        "onCommand:multi-encode.clipboard"
     ],
     "main": "./out/src/extension",
     "contributes": {
         "commands": [{
-            "command": "multi-encode.kick",
-            "title": "multi encode"
+            "command": "multi-encode.selectedText",
+            "title": "for selected text",
+            "category": "multi encode"
+        },{
+            "command": "multi-encode.clipboard",
+            "title": "for clipboard",
+            "category": "multi encode"
         }],
         "configuration": {
             "title": "multi-encode configuration",

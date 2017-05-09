@@ -1,5 +1,6 @@
 'use strict';
 import * as vscode from 'vscode';
+var clipboard = require("copy-paste");
 
 module MultiEncode
 {
@@ -17,7 +18,21 @@ module MultiEncode
         (
             vscode.commands.registerCommand
             (
-                'multi-encode.kick', kick
+                'multi-encode.kick', encodeSelectedText
+            )
+        );
+        context.subscriptions.push
+        (
+            vscode.commands.registerCommand
+            (
+                'multi-encode.selectedText', encodeSelectedText
+            )
+        );
+        context.subscriptions.push
+        (
+            vscode.commands.registerCommand
+            (
+                'multi-encode.clipboard', encodeClipboard
             )
         );
     }
@@ -53,10 +68,9 @@ module MultiEncode
         );
     }
 
-    async function showListAndExecute(textEditor : vscode.TextEditor) : Promise<void>
+    async function showListAndExecute(selectedText : string, mapper : (encoder : (source :string) => string) => void) : Promise<void>
     {
         var list = getConfiguration<any[]>("list");
-        var selectedText = textEditor.document.getText(textEditor.selection);
         if (selectedText.length < 4096)
         {
             applyPreview(list, selectedText);
@@ -70,17 +84,66 @@ module MultiEncode
         );
         if (select)
         {
-            executeEncoder(textEditor, eval(select.description));
+            mapper(eval(select.description));
         }
     }
 
-    export async function kick() : Promise<void>
+    export async function encodeSelectedText() : Promise<void>
     {
         var textEditor = vscode.window.activeTextEditor;
         if (textEditor && textEditor.document)
         {
-            await showListAndExecute(textEditor);
+            await showListAndExecute
+            (
+                textEditor.document.getText(textEditor.selection),
+                encoder => executeEncoder(textEditor, encoder)
+            );
         }
+    }
+    export function encodeClipboardCore(error: any, text: string): Promise<void> {
+        return new Promise<void>
+        (
+            resolve =>
+            {
+                if (error) {
+                    vscode.window
+                        .showErrorMessage(error)
+                        .then(() => resolve());
+                }
+                else
+                {
+                    if (null === text || undefined === text) {
+                        text = "";
+                    }
+                    showListAndExecute
+                    (
+                        text,
+                        encoder => clipboard.copy(encoder(text))
+                    )
+                    .then(() => resolve());
+                }
+            }
+        );
+    }
+    export function encodeClipboard(): Promise<void> {
+        return new Promise<void>
+        (
+            resolve =>
+            {
+                var text = clipboard.paste();
+                if (null !== text && undefined !== text)
+                {
+                    encodeClipboardCore(null, text).then(() => resolve())
+                }
+                else
+                {
+                    clipboard.paste(encodeClipboardCore)
+                    (
+                        (error: any, text: string) => encodeClipboardCore(error, text).then(() => resolve())
+                    )
+                }
+            }
+        );
     }
 }
 
