@@ -4,10 +4,21 @@ All notable changes to the "multi-encode" extension will be documented in this f
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
-## ?.?.? - ????-??-??
+## 2.0.5 - 2017-05-10
+
+### Fixed
+
+- Resolved a publish problem.
+
+## 2.0.0 - 2017-05-10
+
+### Changed
+
+- Changed `multi encode` command's name to `multi encode: to selected text`.
 
 ### Added
 
+- Added `multi encode: to clipboard` command.
 - Specify a license.
 
 ## 1.0.0 - 2017-04-23

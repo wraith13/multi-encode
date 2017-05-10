@@ -3,7 +3,7 @@
     "displayName": "multi-encode",
     "description": "This extention provides many encoders.",
     "icon": "images/multi-encode.128.png",
-    "version": "1.0.0",
+    "version": "2.0.5",
     "publisher": "wraith13",
     "license": "SEE LICENSE IN LICENSE_1_0.txt",
     "engines": {
@@ -27,15 +27,18 @@
     ],
     "main": "./out/src/extension",
     "contributes": {
-        "commands": [{
-            "command": "multi-encode.selectedText",
-            "title": "to selected text",
-            "category": "multi encode"
-        },{
-            "command": "multi-encode.clipboard",
-            "title": "to clipboard",
-            "category": "multi encode"
-        }],
+        "commands": [
+            {
+                "command": "multi-encode.selectedText",
+                "title": "to selected text",
+                "category": "multi encode"
+            },
+            {
+                "command": "multi-encode.clipboard",
+                "title": "to clipboard",
+                "category": "multi encode"
+            }
+        ],
         "configuration": {
             "title": "multi-encode configuration",
             "properties": {
@@ -93,6 +96,9 @@
         "compile": "tsc -watch -p ./",
         "postinstall": "node ./node_modules/vscode/bin/install",
         "test": "node ./node_modules/vscode/bin/test"
+    },
+    "dependencies": {
+        "copy-paste": "^1.1.4"
     },
     "devDependencies": {
         "typescript": "^2.0.3",
