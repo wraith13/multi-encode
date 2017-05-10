@@ -78,7 +78,7 @@
                             "isPreviewable": false
                         },
                         {
-                            "label": "Join lines",
+                            "label": "join lines",
                             "description": "s => s.replace(/(\\r\\n|\\r|\\n)/g, \"\")",
                             "isPreviewable": true
                         }
