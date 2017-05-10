@@ -29,11 +29,11 @@
     "contributes": {
         "commands": [{
             "command": "multi-encode.selectedText",
-            "title": "for selected text",
+            "title": "to selected text",
             "category": "multi encode"
         },{
             "command": "multi-encode.clipboard",
-            "title": "for clipboard",
+            "title": "to clipboard",
             "category": "multi encode"
         }],
         "configuration": {
