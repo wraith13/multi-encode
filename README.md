@@ -21,20 +21,25 @@ multi-encode provide a command in the Command Palette for encode/decode.
 - \ escape
 - eval
 - format JSON
+- join lines
 
 and your encoder/decoder. You can add encoder/decoder to multi-encode by [`settings.json`](#extension-settings)
 
 ## Tutorial
 
-### 0. ⬇️ Install multi-encode:
+### 0. ⬇️ Install multi-encode
 
 Launch VS Code Quick Open(Mac:<kbd>Command</kbd>+<kbd>P</kbd>, Windows and Linux: <kbd>Ctrl</kbd>+<kbd>P</kbd>), Type `ext install multi-encode` and press <kbd>Enter</kbd> and click <kbd>Install</kbd>.  Restart VS Code when installation is completed.
 
-### 1. 🚀 Execute encoder/decoder:
+### 1. 🚀 Execute encoder/decoder to selected text
 
-Select text in document as you like, Launch Command Palette(Mac:<kbd>F1</kbd> or <kbd>Shift</kbd>+<kbd>Command</kbd>+<kbd>P</kbd>, Windows and Linux: <kbd>F1</kbd> or <kbd>Shift</kbd>+<kbd>Ctrl</kbd>+<kbd>P</kbd>), Execute `multi encode` command and select a encoder/decoder as you like.
+Select text in document as you like, Launch Command Palette(Mac:<kbd>F1</kbd> or <kbd>Shift</kbd>+<kbd>Command</kbd>+<kbd>P</kbd>, Windows and Linux: <kbd>F1</kbd> or <kbd>Shift</kbd>+<kbd>Ctrl</kbd>+<kbd>P</kbd>), Execute `multi encode: to selected text` command and select a encoder/decoder as you like.
 
-### 2. 🔧 Next step:
+### 2. 🚀 Execute encoder/decoder to clipboard
+
+Copy text to clipboard as you like, Launch Command Palette, Execute `multi encode: to clipboard` command and select a encoder/decoder as you like.
+
+### 3. 🔧 Next step
 
 You can add encoder/decoder to multi-encode by [`settings.json`](#extension-settings). And you can apply [keyboard shortcuts](#keyboard-shortcut-settings) by `keybindings.json`.
 
@@ -42,7 +47,8 @@ Enjoy!
 
 ## Command
 
-- `multi encode` : Run the encoder/decoder you selected from the list.
+- `multi encode: to selected text` : Run the encoder/decoder you selected from the list to selected text.
+- `multi encode: to clipboard` : Run the encoder/decoder you selected from the list to clipboard.
 
 ## Extension Settings
 
@@ -60,7 +66,8 @@ Command name on `keybindings.json` is diffarent from on Command Pallete. See bel
 
 |on Command Pallete|on keybindings.json|
 |-|-|
-|`multi encode`|`multi-encode.kick`|
+|`multi encode: to selected text`|`multi-encode.selectedText`|
+|`multi encode: to clipboard`|`multi-encode.clipboard`|
 
 ## Release Notes
 
