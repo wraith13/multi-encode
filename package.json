@@ -44,6 +44,26 @@
             "properties": {
                 "multi-encode.list": {
                     "type": "array",
+                    "items": {
+                        "type":"object",
+                        "properties": {
+							"label": {
+                                "type": "string",
+                                "default": "{{put-encoder/decoder-name-here}}",
+                                "description": "[Required] Specify the encoder/decoder name."
+                            },
+                            "description": {
+                                "type": "string",
+                                "default": "{{put-encoder/decoder-javascript-code-here}}",
+                                "description": "[Required] Specify the encoder/decoder JavaScript code."
+                            },
+                            "isPreviewable": {
+                                "type": "boolean",
+                                "default": false,
+                                "description": "[Required] Specify whether to display preview.( Specify false, if encoder/decoder is not stable nor light. )"
+                            }
+                        }
+                    },
                     "default": [
                         {
                             "label": "toLowerCase",
