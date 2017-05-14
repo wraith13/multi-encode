@@ -4,6 +4,12 @@ All notable changes to the "multi-encode" extension will be documented in this f
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## 2.0.6 - 2017-05-14
+
+### Changed
+
+- Improve configuration definition.
+
 ## 2.0.5 - 2017-05-10
 
 ### Fixed

@@ -3,7 +3,7 @@
     "displayName": "multi-encode",
     "description": "This extention provides many encoders.",
     "icon": "images/multi-encode.128.png",
-    "version": "2.0.5",
+    "version": "2.0.6",
     "publisher": "wraith13",
     "license": "SEE LICENSE IN LICENSE_1_0.txt",
     "engines": {
@@ -45,9 +45,9 @@
                 "multi-encode.list": {
                     "type": "array",
                     "items": {
-                        "type":"object",
+                        "type": "object",
                         "properties": {
-							"label": {
+                            "label": {
                                 "type": "string",
                                 "default": "{{put-encoder/decoder-name-here}}",
                                 "description": "[Required] Specify the encoder/decoder name."
