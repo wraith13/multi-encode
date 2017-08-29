@@ -90,8 +90,8 @@ module MultiEncode
 
     export async function encodeSelectedText() : Promise<void>
     {
-        var textEditor = vscode.window.activeTextEditor;
-        if (textEditor && textEditor.document)
+        const textEditor = vscode.window.activeTextEditor;
+        if (textEditor !== undefined && textEditor.document)
         {
             await showListAndExecute
             (
