@@ -4,6 +4,10 @@
 
 This extention provides many encoders for vscode.
 
+## Notice for Mac users
+
+See vscode's [this issue](https://github.com/Microsoft/vscode/issues/16261).
+
 ## Features
 
 multi-encode provide a command in the Command Palette for encode/decode.
