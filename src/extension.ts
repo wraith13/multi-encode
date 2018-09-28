@@ -1,12 +1,12 @@
 'use strict';
 import * as vscode from 'vscode';
-var clipboard = require("copy-paste");
+let clipboard = require("copy-paste");
 
 module MultiEncode
 {
     function getConfiguration<type>(key ?: string) : type
     {
-        var configuration = vscode.workspace.getConfiguration("multi-encode");
+        let configuration = vscode.workspace.getConfiguration("multi-encode");
         return key ?
             configuration[key]:
             configuration;
@@ -70,7 +70,7 @@ module MultiEncode
 
     async function showListAndExecute(selectedText : string, mapper : (encoder : (source :string) => string) => void) : Promise<void>
     {
-        var list = getConfiguration<any[]>("list");
+        let list = getConfiguration<any[]>("list");
         if (selectedText.length < 4096)
         {
             applyPreview(list, selectedText);
@@ -130,7 +130,7 @@ module MultiEncode
         (
             resolve =>
             {
-                var text = clipboard.paste();
+                let text = clipboard.paste();
                 if (null !== text && undefined !== text)
                 {
                     encodeClipboardCore(null, text).then(() => resolve())
