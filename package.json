@@ -25,7 +25,7 @@
         "onCommand:multi-encode.selectedText",
         "onCommand:multi-encode.clipboard"
     ],
-    "main": "./out/src/extension",
+    "main": "./out/source/extension",
     "contributes": {
         "commands": [
             {
