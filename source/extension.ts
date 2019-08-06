@@ -1,6 +1,5 @@
 'use strict';
 import * as vscode from 'vscode';
-let clipboard = require("copy-paste");
 
 module MultiEncode
 {
@@ -118,33 +117,21 @@ module MultiEncode
                     showListAndExecute
                     (
                         text,
-                        encoder => clipboard.copy(encoder(text))
+                        encoder => vscode.env.clipboard.writeText(encoder(text))
                     )
                     .then(() => resolve());
                 }
             }
         );
     }
-    export function encodeClipboard(): Promise<void> {
-        return new Promise<void>
-        (
-            resolve =>
-            {
-                let text = clipboard.paste();
-                if (null !== text && undefined !== text)
-                {
-                    encodeClipboardCore(null, text).then(() => resolve())
-                }
-                else
-                {
-                    clipboard.paste(encodeClipboardCore)
-                    (
-                        (error: any, text: string) => encodeClipboardCore(error, text).then(() => resolve())
-                    )
-                }
-            }
-        );
-    }
+    export const encodeClipboard = async () =>
+    {
+        const text = await vscode.env.clipboard.readText();
+        if (null !== text && undefined !== text)
+        {
+            await encodeClipboardCore(null, text);
+        }
+    };
 }
 
 export function activate(context: vscode.ExtensionContext)
