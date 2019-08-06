@@ -3,71 +3,56 @@ import * as vscode from 'vscode';
 
 module MultiEncode
 {
-    function getConfiguration<type>(key ?: string) : type
+    const getConfiguration = <type>(key ?: string) : type =>
     {
         let configuration = vscode.workspace.getConfiguration("multi-encode");
         return key ?
             configuration[key]:
             configuration;
-    }
+    };
 
-    export function registerCommand(context: vscode.ExtensionContext) : void
-    {
-        context.subscriptions.push
+    export const registerCommand = (context: vscode.ExtensionContext) => context.subscriptions.push
+    (
+        vscode.commands.registerCommand
         (
-            vscode.commands.registerCommand
-            (
-                'multi-encode.kick', encodeSelectedText
-            )
-        );
-        context.subscriptions.push
+            'multi-encode.kick', encodeSelectedText
+        ),
+        vscode.commands.registerCommand
         (
-            vscode.commands.registerCommand
-            (
-                'multi-encode.selectedText', encodeSelectedText
-            )
-        );
-        context.subscriptions.push
+            'multi-encode.selectedText', encodeSelectedText
+        ),
+        vscode.commands.registerCommand
         (
-            vscode.commands.registerCommand
-            (
-                'multi-encode.clipboard', encodeClipboard
-            )
-        );
-    }
+            'multi-encode.clipboard', encodeClipboard
+        )
+    );
 
-    function applyPreview(list : any[], selectedText : string) : void
-    {
-        list.forEach
-        (
-            i =>
+    const applyPreview = (list : any[], selectedText : string) : void => list.forEach
+    (
+        i =>
+        {
+            if (i.isPreviewable)
             {
-                if (i.isPreviewable)
-                {
-                    i.detail = eval(i.description)(selectedText);
-                }
+                i.detail = eval(i.description)(selectedText);
             }
-        );
-    }
-    function executeEncoder(textEditor : vscode.TextEditor, encoder : (source :string) => string)
-    {
-        textEditor.selections.map
+        }
+    );
+    const executeEncoder = (textEditor : vscode.TextEditor, encoder : (source :string) => string) => textEditor.selections.map
+    (
+        selection => textEditor.edit
         (
-            selection => textEditor.edit
-            (
-                (editBuilder: vscode.TextEditorEdit) =>
-                {
-                    editBuilder.replace
-                    (
-                        selection,
-                        encoder(textEditor.document.getText(selection))
-                    );
-                }
-            )
-        );
-    }
+            (editBuilder: vscode.TextEditorEdit) =>
+            {
+                editBuilder.replace
+                (
+                    selection,
+                    encoder(textEditor.document.getText(selection))
+                );
+            }
+        )
+    );
 
-    async function showListAndExecute(selectedText : string, mapper : (encoder : (source :string) => string) => void) : Promise<void>
+    const showListAndExecute = async (selectedText : string, mapper : (encoder : (source :string) => string) => void) : Promise<void> =>
     {
         let list = getConfiguration<any[]>("list");
         if (selectedText.length < 4096)
@@ -85,9 +70,9 @@ module MultiEncode
         {
             mapper(eval(select.description));
         }
-    }
+    };
 
-    export async function encodeSelectedText() : Promise<void>
+    export const encodeSelectedText = async () : Promise<void> =>
     {
         const textEditor = vscode.window.activeTextEditor;
         if (textEditor !== undefined && textEditor.document)
@@ -98,46 +83,28 @@ module MultiEncode
                 encoder => executeEncoder(textEditor, encoder)
             );
         }
-    }
-    export function encodeClipboardCore(error: any, text: string): Promise<void> {
-        return new Promise<void>
+    };
+    export const encodeClipboardCore = async (text: string): Promise<void> =>
+    {
+        if (null === text || undefined === text)
+        {
+            text = "";
+        }
+        await showListAndExecute
         (
-            resolve =>
-            {
-                if (error) {
-                    vscode.window
-                        .showErrorMessage(error)
-                        .then(() => resolve());
-                }
-                else
-                {
-                    if (null === text || undefined === text) {
-                        text = "";
-                    }
-                    showListAndExecute
-                    (
-                        text,
-                        encoder => vscode.env.clipboard.writeText(encoder(text))
-                    )
-                    .then(() => resolve());
-                }
-            }
+            text,
+            encoder => vscode.env.clipboard.writeText(encoder(text))
         );
-    }
+    };
     export const encodeClipboard = async () =>
     {
         const text = await vscode.env.clipboard.readText();
         if (null !== text && undefined !== text)
         {
-            await encodeClipboardCore(null, text);
+            await encodeClipboardCore(text);
         }
     };
 }
 
-export function activate(context: vscode.ExtensionContext)
-{
-    MultiEncode.registerCommand(context);
-}
-
-export function deactivate() {
-}
+export const activate = (context: vscode.ExtensionContext) => MultiEncode.registerCommand(context);
+export const deactivate = () => { };
