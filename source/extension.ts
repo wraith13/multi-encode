@@ -5,7 +5,7 @@ module MultiEncode
 {
     const getConfiguration = <type>(key ?: string) : type =>
     {
-        let configuration = vscode.workspace.getConfiguration("multi-encode");
+        const configuration = vscode.workspace.getConfiguration("multi-encode");
         return key ?
             configuration[key]:
             configuration;
@@ -54,12 +54,12 @@ module MultiEncode
 
     const showListAndExecute = async (selectedText : string, mapper : (encoder : (source :string) => string) => void) : Promise<void> =>
     {
-        let list = getConfiguration<any[]>("list");
+        const list = getConfiguration<any[]>("list");
         if (selectedText.length < 4096)
         {
             applyPreview(list, selectedText);
         }
-        let select : any = await vscode.window.showQuickPick
+        const select : any = await vscode.window.showQuickPick
         (
             list,
             {
@@ -84,18 +84,11 @@ module MultiEncode
             );
         }
     };
-    export const encodeClipboardCore = async (text: string): Promise<void> =>
-    {
-        if (null === text || undefined === text)
-        {
-            text = "";
-        }
-        await showListAndExecute
-        (
-            text,
-            encoder => vscode.env.clipboard.writeText(encoder(text))
-        );
-    };
+    export const encodeClipboardCore = (text: string): Promise<void> => showListAndExecute
+    (
+        text,
+        encoder => vscode.env.clipboard.writeText(encoder(text))
+    );
     export const encodeClipboard = async () =>
     {
         const text = await vscode.env.clipboard.readText();
