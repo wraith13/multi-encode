@@ -21,7 +21,6 @@
         "Other"
     ],
     "activationEvents": [
-        "onCommand:multi-encode.kick",
         "onCommand:multi-encode.selectedText",
         "onCommand:multi-encode.clipboard"
     ],

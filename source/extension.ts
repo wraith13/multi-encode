@@ -15,10 +15,6 @@ module MultiEncode
     (
         vscode.commands.registerCommand
         (
-            'multi-encode.kick', encodeSelectedText
-        ),
-        vscode.commands.registerCommand
-        (
             'multi-encode.selectedText', encodeSelectedText
         ),
         vscode.commands.registerCommand
@@ -84,17 +80,16 @@ module MultiEncode
             );
         }
     };
-    export const encodeClipboardCore = (text: string): Promise<void> => showListAndExecute
-    (
-        text,
-        encoder => vscode.env.clipboard.writeText(encoder(text))
-    );
     export const encodeClipboard = async () =>
     {
         const text = await vscode.env.clipboard.readText();
         if (null !== text && undefined !== text)
         {
-            await encodeClipboardCore(text);
+            await showListAndExecute
+            (
+                text,
+                encoder => vscode.env.clipboard.writeText(encoder(text))
+            );
         }
     };
 }
