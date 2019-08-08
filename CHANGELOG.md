@@ -4,11 +4,11 @@ All notable changes to the "multi-encode" extension will be documented in this f
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
-## ?.?.? - 20??-??-??
+## 2.0.7 - 2019-08-09
 
-### Changed
+### Fixed
 
-- DOC: Changed description that how to install in README.
+- Fixed an that where reading and writing to the clipboard would not work correctly when VS Code was launched from the dock on a Mac.
 
 ## 2.0.6 - 2017-05-14
 
