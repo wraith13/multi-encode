@@ -4,6 +4,12 @@ All notable changes to the "multi-encode" extension will be documented in this f
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## 2.?.? - 202?-??-??
+
+### Security
+
+- `npm audit fix`ed.
+
 ## 2.0.7 - 2019-08-09
 
 ### Fixed
