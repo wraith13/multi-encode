@@ -6,6 +6,10 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 ## 2.?.? - 202?-??-??
 
+### Added
+
+- Supported Web platform. ( `vscode.dev` )
+
 ### Security
 
 - `npm audit fix`ed.

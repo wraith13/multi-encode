@@ -6,7 +6,8 @@
         "target": "es6",
         "outDir": "out",
         "lib": [
-            "es6"
+            "es6",
+            "WebWorker"
         ],
         "noImplicitAny": true,
         "strictNullChecks": true,
@@ -27,7 +28,9 @@
         "skipLibCheck": false,
         "pretty": false,
         "noEmitOnError": true,
-        "rootDir": "."
+        "rootDir": ".",
+        "resolveJsonModule": true,
+        "esModuleInterop": true
     },
     "exclude": [
         "node_modules",

@@ -7,7 +7,7 @@
     "publisher": "wraith13",
     "license": "SEE LICENSE IN LICENSE_1_0.txt",
     "engines": {
-        "vscode": "^1.30.0"
+        "vscode": "^1.61.0"
     },
     "bugs": {
         "url": "https://github.com/wraith13/multi-encode/issues"
@@ -24,7 +24,8 @@
         "onCommand:multi-encode.selectedText",
         "onCommand:multi-encode.clipboard"
     ],
-    "main": "./out/source/extension",
+    "main": "./out/extension.js",
+    "browser": "./out/extension.js",
     "contributes": {
         "commands": [
             {
@@ -111,17 +112,27 @@
         }
     },
     "scripts": {
-        "vscode:prepublish": "tsc -p ./",
-        "compile": "tsc -watch -p ./",
-        "postinstall": "node ./node_modules/vscode/bin/install",
-        "test": "node ./node_modules/vscode/bin/test"
+        "pretest": "npm run compile-web",
+        "vscode:prepublish": "npm run package-web",
+        "compile-web": "webpack",
+        "watch-web": "webpack --watch",
+        "package-web": "webpack --mode production --devtool hidden-source-map",
+        "lint": "eslint source --ext ts",
+        "run-in-browser": "vscode-test-web --browserType=chromium --extensionDevelopmentPath=. ."
     },
     "devDependencies": {
-        "@types/mocha": "^2.2.32",
-        "@types/node": "^6.0.40",
-        "minimist": ">=1.2.3",
-        "mocha": "^6.2.0",
-        "typescript": "^2.0.3",
-        "vscode": "^1.0.0"
+        "@types/vscode": "^1.61.0",
+        "@types/webpack-env": "^1.16.2",
+        "@typescript-eslint/eslint-plugin": "^4.31.1",
+        "@typescript-eslint/parser": "^4.31.1",
+        "@vscode/test-web": "^0.0.13",
+        "assert": "^2.0.0",
+        "eslint": "^7.32.0",
+        "glob": "^7.2.0",
+        "process": "^0.11.10",
+        "ts-loader": "^9.2.5",
+        "typescript": "^4.4.3",
+        "webpack": "^5.52.1",
+        "webpack-cli": "^4.8.0"
     }
 }
