@@ -3,7 +3,7 @@
     "displayName": "multi-encode",
     "description": "This extention provides many encoders.",
     "icon": "images/multi-encode.128.png",
-    "version": "2.0.7",
+    "version": "2.1.0",
     "publisher": "wraith13",
     "license": "SEE LICENSE IN LICENSE_1_0.txt",
     "engines": {

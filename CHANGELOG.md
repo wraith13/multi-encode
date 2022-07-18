@@ -4,11 +4,13 @@ All notable changes to the "multi-encode" extension will be documented in this f
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
-## 2.?.? - 202?-??-??
+## 2.1.0 - 2022-07-18
 
 ### Added
 
 - Supported Web platform. ( `vscode.dev` )
+- Also released on [github.com](https://github.com/wraith13/multi-encode/releases)
+- VSIX download link in README.md
 
 ### Security
 
